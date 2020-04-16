@@ -84,14 +84,20 @@ Vue全家桶实战模仿小米商城 从零独立开发企业级电商系统（�
 
         public --- 存放一些公共资源，比如大图片等
         resource --- 一些打包的资源，供我们使用
-        src --- 
+        .gitignore --- git忽略配置文件
+        package-lock.json --- 项目包管控文件
+        package.json --- 项目配置
+        README.md --- 项目说明书
+        dist --- 打包后的项目
+        src --- 源码目录
             |- api --- 承载整个项目的api请求
-            |- assets --- 存放一些图片（小图片，icon等）
-            |- components --- 程序封装的组件 
+            |- assets --- 静态文件目录存放一些图片（小图片，icon等）
+            |- components --- 组件文件
             |- util --- 一些公共的方法
             |- storage --- 数据存储，缓存
             |- store --- vuex
-            |- App.vue --- 根组件
+            |- App.vue --- 是项目入口文件
+            |- main.js --- 是项目的核心文件，入口
             |- router.js --- 路由文件
             |- pages --- 页面
                 |- index.vue --- 首页
