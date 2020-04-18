@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    {{message}}
+    <router-view></router-view>
   </div>
 </template>
 
@@ -8,12 +8,12 @@
   export default {
     data() {
       return {
-        message: '华爸爸'
+        
       }
     },
     name: 'App',
     components: {
-
+      
     },
     mounted() {
 
