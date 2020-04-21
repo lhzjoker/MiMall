@@ -1,15 +1,16 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    {{res}}
   </div>
 </template>
 
 <script>
-  import storage from './storage/index.js'
+  // import storage from './storage/index.js'
   export default {
     data() {
       return {
-        
+        res: ''
       }
     },
     name: 'App',
@@ -17,9 +18,11 @@
       
     },
     mounted() {
-      console.log(123);
-      // storage.setItem("a",1,"user")
-      storage.clear("a")
+      this.axios({
+        url:'/user/login'
+      }).then((res)=>{
+        this.res = res
+      })
     }
   }
 </script>
