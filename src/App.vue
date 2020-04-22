@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    {{res}}
   </div>
 </template>
 
@@ -10,7 +9,7 @@
   export default {
     data() {
       return {
-        res: ''
+        
       }
     },
     name: 'App',
@@ -18,22 +17,11 @@
       
     },
     mounted() {
-      this.axios({
-        url:'/user/login'
-      }).then((res)=>{
-        this.res = res
-      })
+      
     }
   }
 </script>
 
-<style>
-  #app {
-      font-family: Avenir, Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-align: center;
-      color: #2c3e50;
-      margin-top: 60px;
-    }
+<style lang="scss">
+@import './assets/scss/reset.scss' 
 </style>
