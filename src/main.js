@@ -24,7 +24,7 @@ axios.interceptors.response.use(function(response){
 })
 
 //mock开关，需要使用mock的时候使用
-const mock = true
+const mock = false
 if(mock){
   //注意这里要用require，注意这里不能使用import，import是预编译加载，不使用的时候会报错，require不使用的时候不会报错
   require('./mock/api')
