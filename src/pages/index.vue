@@ -53,7 +53,11 @@
           <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
         </swiper>
       </div>
-      <div class="ads-box"></div>
+      <div class="ads-box">
+        <a :href="'/#/product/'+item.id" v-for="(item,index) in adsList" :key="index">
+          <img :src="item.image" alt />
+        </a>
+      </div>
       <div class="banner"></div>
       <div class="product-box"></div>
     </div>
@@ -148,6 +152,24 @@ export default {
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]
+      ],
+      adsList: [
+        {
+          id: "33",
+          image: "/imgs/ads/ads-1.png"
+        },
+        {
+          id: "48",
+          image: "/imgs/ads/ads-2.jpg"
+        },
+        {
+          id: "45",
+          image: "/imgs/ads/ads-3.png"
+        },
+        {
+          id: "47",
+          image: "/imgs/ads/ads-4.jpg"
+        }
       ]
     };
   }
@@ -197,7 +219,7 @@ export default {
           &:hover {
             background-color: $colorA;
             .children {
-              display: block ;
+              display: block;
             }
           }
           .children {
@@ -210,7 +232,6 @@ export default {
             border: 1px solid $colorH;
             ul {
               display: flex;
-              flex-direction: row;
               justify-content: space-between;
               height: 75px;
               li {
@@ -229,12 +250,21 @@ export default {
                 display: inline-block;
                 color: #333333;
                 font-size: 14px;
-                
               }
             }
           }
         }
       }
+    }
+  }
+  .ads-box {
+    @include flex();
+    margin-top: 14px;
+    margin-bottom: 31px;
+    img {
+      width: 294px;
+      height: 166px;
+      display: inline-block;
     }
   }
 }
