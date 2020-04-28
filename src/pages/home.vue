@@ -13,7 +13,7 @@
         name: 'nav-home',
         components: {
             NavHeader,
-            NavFooter
+            NavFooter,
         }
     }
 </script>

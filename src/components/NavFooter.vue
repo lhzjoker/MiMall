@@ -30,7 +30,6 @@ export default {
   background-color: $colorB;
   color: #b0b0b0;
   position: absolute;
-  bottom: 0;
   border-top: 3px solid $colorA;
   width: 100%;
   text-align: center;

@@ -222,6 +222,7 @@ export default {
             opacity: 0;         //透明度为0
             overflow: hidden;   //内容会被修剪，并且其余内容是不可见的。
             transition: all .5s;
+            background-color: #ffffff;
             .product {
               float: left;
               height: 220px;
