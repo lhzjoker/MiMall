@@ -58,15 +58,56 @@
           <img :src="item.image" alt />
         </a>
       </div>
-      <div class="banner"></div>
-      <div class="product-box"></div>
+      <div class="banner">
+        <a :href="'/#/product/' + banner.id">
+          <img :src="banner.image" alt />
+        </a>
+      </div>
+    </div>
+    <div class="product-box">
+      <div class="container">
+        <h2>手机</h2>
+        <div class="wraper">
+          <div class="banner">
+            <a href="'/#/product/35'">
+              <img src="/imgs/mix-alpha.jpg" alt />
+            </a>
+          </div>
+          <div class="list-box">
+            <div class="list" v-for="(arr,i) in phoneList" :key="i">
+              <div class="item" v-for="(item,j) in arr" :key="j">
+                <span :class="{'new-pro':j%2==0}">新品</span>
+                <div class="item-img">
+                  <img :src="item.mainImage" />
+                </div>
+                <h3>{{item.name}}</h3>
+                <div class="item-info">
+                  <p>{{item.subtitle}}</p>
+                </div>
+                <div class="item-price">
+                  <p @click="addCart(item.id)">{{item.price}}元</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <service-bar></service-bar>
+    <modal title="友情提示" btnType="1" sureText="查看购物车"
+     modalType="middle" :showModal="showModal"
+     @submit="gotoCart" @cancel="showModal=false"
+     >
+      <template v-slot:body>
+        <p>商品添加成功！</p>
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
 import ServiceBar from "./../components/ServiceBar";
+import Modal from "./../components/Modal";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 export default {
@@ -74,7 +115,8 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    ServiceBar
+    ServiceBar,
+    Modal
   },
   data() {
     return {
@@ -170,8 +212,47 @@ export default {
           id: "47",
           image: "/imgs/ads/ads-4.jpg"
         }
-      ]
+      ],
+      banner: {
+        id: "30",
+        image: "/imgs/banner-1.png"
+      },
+      phoneList: [],
+      showModal: false
     };
+  },
+  methods: {
+    init() {
+      this.axios
+        .get("/products", {
+          params: {
+            categoryId: "100012",
+            pageSize: 14
+          }
+        })
+        .then(res => {
+          res.list = res.list.slice(6, 14);
+          this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)];
+        });
+    },
+    addCart() {
+      this.showModal = true;
+      //这里需要登陆，完善登陆页面之后再设置
+      // this.axios.post("/carts", {
+      //   productId: id,
+      //   selected: true
+      // }).then(()=>{
+
+      // }).catch(()=>{
+
+      // });
+    },
+    gotoCart(){
+      this.$router.push('/cart')
+    }
+  },
+  mounted() {
+    this.init();
   }
 };
 </script>
@@ -192,12 +273,13 @@ export default {
     }
     .nav-menu {
       position: absolute;
-      z-index: 10;
+      z-index: 5;
       height: 451px;
       width: 264px;
       padding: 26px 0;
       box-sizing: border-box;
-      background-color: #55585a91;
+      background-color: rgba(85, 88, 90, 0.48);
+      // background-color: #55585a91;
       .menu-wrap {
         .menu-item {
           height: 50px;
@@ -232,6 +314,7 @@ export default {
             border: 1px solid $colorH;
             ul {
               display: flex;
+              flex-direction: row;
               justify-content: space-between;
               height: 75px;
               li {
@@ -265,6 +348,102 @@ export default {
       width: 294px;
       height: 166px;
       display: inline-block;
+    }
+  }
+  .banner {
+    height: 170px;
+    a {
+      display: inline-block;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .product-box {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding-bottom: 30px;
+    h2 {
+      font-size: 22px;
+      padding-bottom: 20px;
+      padding-top: 20px;
+      display: inline-block;
+      color: #333333;
+    }
+    .wraper {
+      height: 619px;
+      display: flex;
+      .banner {
+        margin-right: 14px;
+        a {
+          width: 224px;
+          height: 619px;
+          img {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .list-box {
+        .list {
+          @include flex();
+          width: 986px;
+          margin-bottom: 14px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          .item {
+            height: 302px;
+            width: 236px;
+            background-color: #ffffff;
+            text-align: center;
+            span {
+              display: inline-block;
+              width: 67px;
+              height: 24px;
+              line-height: 24px;
+              color: #ffffff;
+              //设置不同情况不同样式
+              &.new-pro {
+                background-color: #7ecf68;
+              }
+              &.kill-pro {
+                background-color: #e82626;
+              }
+            }
+            .item-img {
+              img {
+                width: 100%;
+                height: 195px;
+                display: inline-block;
+              }
+            }
+            .item-info {
+              color: #999999;
+              margin-bottom: 10px;
+              margin-top: 6px;
+            }
+            .item-price {
+              cursor: pointer;
+              height: 30px;
+              p {
+                display: inline-block;
+                color: #f20a0a;
+                font-size: 14px;
+                font-weight: bold;
+                &:after {
+                  @include bgImg(20px, 30px, "/imgs/icon-cart-hover.png");
+                  margin-left: 5px;
+                  vertical-align: middle;
+                  content: "";
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
