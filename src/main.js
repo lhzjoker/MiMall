@@ -35,7 +35,7 @@ if(mock){
 //VueAxios的作用是将axios框架挂载到vue实例上，这样我们在其他vue文件中使用axios就不用importer了，直接用this.axios
 Vue.use(VueAxios,axios)
 Vue.use(VueLazyload,{
-  loading: '/imgs/loading-svg/loading-bars.svg'
+  loading: '/imgs/loading-svg/loading-bars.svg'   //懒加载loading动画
 })
 Vue.config.productionTip = false
 
