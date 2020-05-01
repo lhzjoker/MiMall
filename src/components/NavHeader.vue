@@ -31,7 +31,7 @@
                 <li class="product" v-for="(item,index) in phoneList" :key="index">
                   <a :href="'/#/product' + item.id" target="_blank">
                     <div class="product-img">
-                      <img :src="item.mainImage" :alt="item.subtitle" />
+                      <img v-lazy="item.mainImage" :alt="item.subtitle" />
                     </div>
                     <div class="product-name">{{item.name}}</div>
                     <div class="product-price">{{item.price | currency}}</div>
@@ -47,7 +47,7 @@
                 <li class="product" v-for="(item,index) in RedMi" :key="index">
                   <a :href="'/#/product' + item.id" target="_blank">
                     <div class="product-img">
-                      <img :src="item.mainImage" :alt="item.subtitle" />
+                      <img v-lazy="item.mainImage" :alt="item.subtitle" />
                     </div>
                     <div class="product-name">{{item.name}}</div>
                     <div class="product-price">{{item.price | currency}}</div>
@@ -63,7 +63,7 @@
                 <li class="product" v-for="(item,index) in RedMi" :key="index">
                   <a :href="'/#/product' + item.id" target="_blank">
                     <div class="product-img">
-                      <img :src="item.mainImage" :alt="item.subtitle" />
+                      <img v-lazy="item.mainImage" :alt="item.subtitle" />
                     </div>
                     <div class="product-name">{{item.name}}</div>
                     <div class="product-price">{{item.price | currency}}</div>
