@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueCookie from 'vue-cookie'
 import VueLazyload from 'vue-lazyload'
 import App from './App.vue'
 // import env from './env'
@@ -37,6 +38,7 @@ Vue.use(VueAxios,axios)
 Vue.use(VueLazyload,{
   loading: '/imgs/loading-svg/loading-bars.svg'   //懒加载loading动画
 })
+Vue.use(VueCookie)
 Vue.config.productionTip = false
 
 new Vue({
