@@ -1,0 +1,48 @@
+.modal {
+    @include position(fixed);   //fixed固定定位，相对于浏览器
+    z-index: 10;
+    transition: all .5s;
+    &.slide-enter-active{
+        top: 0;
+    }
+    &.slide-leave-active{
+        top: -100%;
+    }
+    &.slide-enter{
+        top: -100%;
+    }
+    .mask{
+        @include position(fixed);
+        background-color: $colorI;
+        opacity: 0.5;
+    }
+    .modal-dialog{
+        @include position(absolute,40%,50%,660px,auto);
+        background-color: #ffffff;
+        transform: translate(-50%,-50%);    //往上（x轴）,左（y轴）移动自身长宽的 50%，以使其居于中心位置
+        .modal-header{
+            font-size: 16px;
+            background-color: #f5f5f5;
+            padding: 0 25px;
+            height: 60px;
+            line-height: 60px;
+            .icon-close{
+                @include positionImg(absolute,23px,25px,14px,14px,'/imgs/icon-close.png');
+                transition: transform .3s;  //给transform加一个动画效果
+                &:hover{
+                    transform: scale(1.5);  //鼠标移上去的时候放大1.5倍
+                }
+            }
+        }
+        .modal-body{
+            padding: 42px 42px 54px;
+            font-size: 14px;
+        }
+        .modal-footer{
+            height: 82px;
+            line-height: 82px;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+    }
+}

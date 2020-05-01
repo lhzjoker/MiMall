@@ -15,3 +15,21 @@
     background-size: $size;
 }
 
+@mixin position($pos:absolute,$top:0,$left:0,$w:100%,$h:100%){
+    position: $pos;
+    top: $top;
+    left: $left;
+    width: $w;
+    height: $h;
+}
+
+@mixin positionImg($pos:absolute,$top:0,$right:0,$w:0,$h:0,$img:'',$size:contain){
+    position: $pos;
+    top:$top;
+    right: $right;
+    width: $w;
+    height: $h;
+    background: url($img) no-repeat center;
+    background-size: $size;
+}
+
