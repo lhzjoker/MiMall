@@ -10,7 +10,7 @@
         </div>
         <div class="top-user">
           <a href="javascript:;" v-if="username">{{username}}</a>
-          <a href="javascript:;" v-if="!username" @click="login">登陆</a>
+          <a href="javascript:;" v-if="!username" @click="login">登录</a>
           <a href="javascript:;" v-if="username">我的订单</a>
           <a href="javascript:;" class="my-cart" @click="goToCart">
             <span class="icon-cart"></span>购物车

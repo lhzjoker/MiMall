@@ -1,5 +1,17 @@
 .container{
+    position: relative;
     width: 1226px;
     margin-left: auto;
     margin-right: auto;
+}
+a{
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}
+input{
+    outline: none;
+    box-sizing: border-box;
+    font-size: 14px;
 }
