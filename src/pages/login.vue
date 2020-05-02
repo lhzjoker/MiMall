@@ -16,10 +16,10 @@
             <span>扫码登录</span>
           </h3>
           <div class="input">
-            <input type="text" placeholder="请输入账号" v-model="username" />
+            <input type="text" placeholder="请输入账号" v-model="username"  autocomplete="on"/>
           </div>
           <div class="input">
-            <input type="text" placeholder="请输入密码" v-model="password" />
+            <input type="password" placeholder="请输入密码" v-model="password" autocomplete="on"/>
           </div>
           <div class="btn-box">
             <div class="btn">
@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="tips">
-            <div class="sms" @click="register">手机短信登录注册</div>
+            <div class="sms" @click="register">手机短信登录/注册</div>
             <div class="reg">
               立即注册
               <span>|</span>
@@ -80,6 +80,8 @@ export default {
         username,
         password,
         email
+      }).then(()=>{
+        alert('注册成功')
       });
     }
   }
