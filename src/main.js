@@ -19,9 +19,13 @@ axios.interceptors.response.use(function(response){
   if(res.status == 0){      //状态码为0代表登陆成功
     return res.data
   }else if(response.status == 10){    //状态码为10代表未登陆，跳转到登陆页面
-    window.location.href = '/#/login'   //跳转到登陆页面
+    if(location.hash!='#/index'){     //如果没有登录则只能访问首页
+      window.location.href = '/#/login'   //跳转到登陆页面
+    }
+    
   }else{
     alert(res.msg)
+    return new Promise.reject()   //发生错误，promise返回拒绝值
   }
 })
 
