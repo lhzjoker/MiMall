@@ -145,6 +145,9 @@ export default {
         display: inline-block;
         color: #b0b0b0;
         margin-right: 17px;
+        &:hover{
+          color: #ffffff;
+        }
       }
       .my-cart {
         width: 110px;
