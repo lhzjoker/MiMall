@@ -5,6 +5,7 @@ import VueAxios from 'vue-axios'
 import VueCookie from 'vue-cookie'
 import VueLazyload from 'vue-lazyload'
 import App from './App.vue'
+import store from './store/index'
 // import env from './env'
 
 //根据前端跨域进行调整，`baseURL` 将自动加在 `url` 前面
@@ -21,11 +22,10 @@ axios.interceptors.response.use(function(response){
   }else if(response.status == 10){    //状态码为10代表未登陆，跳转到登陆页面
     if(location.hash!='#/index'){     //如果没有登录则只能访问首页
       window.location.href = '/#/login'   //跳转到登陆页面
-    }
-    
+    }  
   }else{
     alert(res.msg)
-    return new Promise.reject()   //发生错误，promise返回拒绝值
+    return Promise.reject()   //发生错误，promise返回拒绝值
   }
 })
 
@@ -46,6 +46,7 @@ Vue.use(VueCookie)
 Vue.config.productionTip = false
 
 new Vue({
+  store,
   router: router,
   render: h => h(App),
 }).$mount('#app')

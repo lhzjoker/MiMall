@@ -12,8 +12,10 @@
           <a href="javascript:;" v-if="username">{{username}}</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
           <a href="javascript:;" v-if="username">我的订单</a>
+          <a href="javascript:;" v-if="username" @click="offlogin">退出</a>
           <a href="javascript:;" class="my-cart" @click="goToCart">
-            <span class="icon-cart"></span>购物车
+            <span class="icon-cart"></span>
+            购物车({{cartcount}})
           </a>
         </div>
       </div>
@@ -86,45 +88,58 @@
 export default {
   name: "nav-header",
   data() {
-      return {
-          phoneList: [],
-          username: '',
-          RedMi: []
-      }
+    return {
+      phoneList: [],
+      RedMi: []
+    };
+  },
+  computed: {
+    username() {
+      return this.$store.state.username;
+    },
+    cartcount() {
+      return this.$store.state.cartcount;
+    }
   },
   //局部过滤器
   filters: {
-      currency(val){
-          if(!val){
-              return '0.00'
-          }
-          //val.toFixed(2)后面加两个小数点
-          return '￥' + val.toFixed(2) + '元'
+    currency(val) {
+      if (!val) {
+        return "0.00";
       }
+      //val.toFixed(2)后面加两个小数点
+      return "￥" + val.toFixed(2) + "元";
+    }
   },
   mounted() {
-      this.getProductList()
+    this.getProductList();
   },
   methods: {
-      getProductList(){
-          this.axios.get('/products',{
-              params: {
-                categoryId: '100012'
-              }
-          }).then((res)=>{
-              if(res.list.length>6){
-                  this.phoneList = res.list.slice(0,6)
-                  this.RedMi = res.list.slice(6,12)
-              }
-          })
-      },
-      goToCart(){
-          //路由跳转
-          this.$router.push('/cart')
-      },
-      login(){
-          this.$router.push('/login')
-      }
+    getProductList() {
+      this.axios
+        .get("/products", {
+          params: {
+            categoryId: "100012"
+          }
+        })
+        .then(res => {
+          if (res.list.length > 6) {
+            this.phoneList = res.list.slice(0, 6);
+            this.RedMi = res.list.slice(6, 12);
+          }
+        });
+    },
+    goToCart() {
+      //路由跳转
+      this.$router.push("/cart");
+    },
+    login() {
+      this.$router.push("/login");
+    },
+    offlogin() {
+      this.axios.post("/user/logout");
+      this.$cookie.delete("userId");
+    }
   }
 };
 </script>
@@ -145,7 +160,7 @@ export default {
         display: inline-block;
         color: #b0b0b0;
         margin-right: 17px;
-        &:hover{
+        &:hover {
           color: #ffffff;
         }
       }
@@ -222,9 +237,9 @@ export default {
             box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
             z-index: 10;
             height: 0;
-            opacity: 0;         //透明度为0
-            overflow: hidden;   //内容会被修剪，并且其余内容是不可见的。
-            transition: all .5s;
+            opacity: 0; //透明度为0
+            overflow: hidden; //内容会被修剪，并且其余内容是不可见的。
+            transition: all 0.5s;
             background-color: #ffffff;
             .product {
               float: left;
@@ -254,17 +269,17 @@ export default {
               .product-price {
                 color: $colorA;
               }
-              &:before{
-                  content: ' ';
-                  position: absolute;
-                  top: 28px;
-                  right: 0px;
-                  border-right: 1px solid $colorF;
-                  height: 100px;
-                  width: 1px;
+              &:before {
+                content: " ";
+                position: absolute;
+                top: 28px;
+                right: 0px;
+                border-right: 1px solid $colorF;
+                height: 100px;
+                width: 1px;
               }
-              &:last-child::before{
-                  display: none;    //最后一个before元素不显示
+              &:last-child::before {
+                display: none; //最后一个before元素不显示
               }
             }
           }

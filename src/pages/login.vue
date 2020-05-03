@@ -71,6 +71,7 @@ export default {
         })
         .then(res => {
           this.$cookie.set("userId", res.id, { expires: "1M" }); //保存用户id
+          this.$store.dispatch('saveUserName',res.username)
           this.$router.push("/index");
         });
     },
