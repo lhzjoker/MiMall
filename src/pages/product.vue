@@ -1,14 +1,14 @@
 <template>
   <div class="product">
-    <product-params>
+    <product-params :title="product.name">
       <template v-slot:buy>
-        <button class="btn">立即购买</button>
+        <button class="btn" @click="buy">立即购买</button>
       </template>
     </product-params>
     <div class="content">
       <div class="item-bg-1">
-        <h2>小米9</h2>
-        <h3>小米9 战斗天使</h3>
+        <h2>{{product.name}}</h2>
+        <h3>{{product.subtitle}}</h3>
         <p>
           <a href="javascript:;">全球首款双频 GP</a>
           <span>|</span>
@@ -19,7 +19,7 @@
           <a href="javascript:;">红外人脸识别</a>
         </p>
         <div class="price">
-          <span>￥</span>2599
+          <span>￥</span>{{product.price}}
         </div>
       </div>
       <div class="item-bg-2"></div>
@@ -43,8 +43,8 @@
           <br />更能AI 精准分析视频内容，15个场景智能匹配背景音效。
         </p>
         <div class="video-bg" @click="onvideo"></div>
-        <div class="video-box">
-          <div class="overlay" v-if="showVideo"></div>
+        <div class="video-box" >
+          <div class="overlay" v-show="showVideo"></div>
           <div class="video" :class="{'slide':showVideo}">
             <span class="icon-close" @click="offvideo"></span>
             <video src="/imgs/product/video.mp4" autoplay muted controls="controls"></video>
@@ -96,8 +96,21 @@ export default {
     },
     offvideo() {
       this.showVideo = false;
+    },
+    getUserInfo(){
+      let id = this.$route.params.id    //获取路由参数id
+      this.axios.get(`/products/${id}`).then((res)=>{
+        this.product = res
+      })
+    },
+    buy(){
+      let id = this.$route.params.id
+      this.$router.push(`/detail/${id}`)
     }
-  }
+  },
+  mounted() {
+    this.getUserInfo()
+  },
 };
 </script>
 

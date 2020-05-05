@@ -94,10 +94,15 @@
       </div>
     </div>
     <service-bar></service-bar>
-    <modal title="友情提示" btnType="1" sureText="查看购物车"
-     modalType="middle" :showModal="showModal"
-     @submit="gotoCart" @cancel="showModal=false"
-     >
+    <modal
+      title="友情提示"
+      btnType="1"
+      sureText="查看购物车"
+      modalType="middle"
+      :showModal="showModal"
+      @submit="gotoCart"
+      @cancel="showModal=false"
+    >
       <template v-slot:body>
         <p>商品添加成功！</p>
       </template>
@@ -235,20 +240,22 @@ export default {
           this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)];
         });
     },
-    addCart() {
-      this.showModal = true;
-      //这里需要登陆，完善登陆页面之后再设置
-      // this.axios.post("/carts", {
-      //   productId: id,
-      //   selected: true
-      // }).then(()=>{
-
-      // }).catch(()=>{
-
-      // });
+    addCart(id) {
+      this.axios
+        .post("/carts", {
+          productId: id,
+          selected: true
+        })
+        .then((res = { cartProductVoList: 0 }) => {
+          this.showModal = true;
+          this.$store.dispatch("savaCartCount", res.cartTotalQuantity);
+        })
+        .catch(() => {
+          this.showModal = true;
+        });
     },
-    gotoCart(){
-      this.$router.push('/cart')
+    gotoCart() {
+      this.$router.push("/cart");
     }
   },
   mounted() {

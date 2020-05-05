@@ -2,7 +2,7 @@
   <div class="productparams">
     <div class="nav-topbar" :class="{'is-fixed':isFixed}">
       <div class="container">
-        <div class="title">小米CC9</div>
+        <div class="title">{{title}}</div>
         <div class="params">
           <a href="javascript:;">概述</a>
           <span>|</span>
@@ -20,6 +20,9 @@
 export default {
   name: "product",
   components: {},
+  props:{
+    title: String
+  },
   data() {
     return {
       isFixed: false
@@ -59,6 +62,7 @@ export default {
     background-color: #ffffff;
     height: 71px;
     line-height: 71px;
+    z-index: 10;
     .container {
       display: flex;
       flex-direction: row;
