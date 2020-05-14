@@ -4,6 +4,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueCookie from 'vue-cookie'
 import VueLazyload from 'vue-lazyload'
+import { Message } from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue'
 import store from './store/index'
 // import env from './env'
@@ -25,7 +27,7 @@ axios.interceptors.response.use(function(response){
     }
     return Promise.reject()   //发生错误，promise返回拒绝值
   }else{
-    alert(res.msg)
+    Message.error(res.msg)
     return Promise.reject()   //发生错误，promise返回拒绝值
   }
 })
@@ -37,7 +39,8 @@ if(mock){
   require('./mock/api')
 }
 
-
+//把message组件挂载到vue实例，供全局使用
+Vue.prototype.$message = Message;
 //VueAxios的作用是将axios框架挂载到vue实例上，这样我们在其他vue文件中使用axios就不用importer了，直接用this.axios
 Vue.use(VueAxios,axios)
 Vue.use(VueLazyload,{
