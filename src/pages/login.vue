@@ -70,9 +70,14 @@ export default {
           password
         })
         .then(res => {
-          this.$cookie.set("userId", res.id, { expires: "1M" }); //保存用户id
+          this.$cookie.set('userId', res.id, { expires: 'Session' }); //保存用户id
           this.$store.dispatch('saveUserName',res.username)
-          this.$router.push("/index");
+          this.$router.push({
+            name: 'index',
+            params:{
+              from: 'login'
+            }
+          });
         });
     },
     register() {
@@ -82,7 +87,7 @@ export default {
         password,
         email
       }).then(()=>{
-        alert('注册成功')
+        this.$message.success('注册成功')
       });
     }
   }
