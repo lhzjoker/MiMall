@@ -34,7 +34,7 @@
   .order {
     padding: 30px 0;
     border-bottom: 2px solid $colorA;
-
+    background-color: #ffffff;
     .logo {
       width: 55px;
       height: 55px;
