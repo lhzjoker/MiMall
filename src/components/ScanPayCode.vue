@@ -95,6 +95,9 @@ export default {
         text-align: center;
         font-size: 14px;
         color: #333333;
+        span{
+          color: $colorA;
+        }
       }
     }
   }
