@@ -6,6 +6,7 @@
       </template>
     </order-header>
     <div class="container">
+      <loading v-if="loading"></loading>
       <div class="wrap" v-for="(order,index) in list" :key="index">
         <div class="header">
           <div class="title">
@@ -43,21 +44,41 @@
           </div>
         </div>
       </div>
+      <no-data v-if="!loading && list.length == 0"></no-data>
+      <el-pagination
+        class="pagination"
+        :pageSize="pageSize"
+        background
+        layout="prev, pager, next"
+        :total="total"
+        @current-change="handelchange"
+      ></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
 import OrderHeader from "./../components/OrderHeader";
+import Loading from "./../components/Loading";
+import NoData from "./../components/NoData";
+import { Pagination } from "element-ui";
+import infiniteScroll from "vue-infinite-scroll";
 export default {
   name: "order-list",
   components: {
-    OrderHeader
+    OrderHeader,
+    Loading,
+    NoData,
+    [Pagination.name]: Pagination
   },
+  directives: { infiniteScroll },
   data() {
     return {
       list: [], //订单列表
-      price: 0 //订单价格
+      loading: false, //是否展示loading页面
+      total: 0, //返回的总数据条数
+      pageSize: 5, //每一页的条数
+      pageNum: 1
     };
   },
   mounted() {
@@ -65,9 +86,43 @@ export default {
   },
   methods: {
     getOrderList() {
-      this.axios.get("/orders").then(res => {
-        this.list = res.list;
+      this.loading = true;
+      this.axios
+        .get("/orders", {
+          params: {
+            pageSize: 5,
+            pageNum: this.pageNum
+          }
+        })
+        .then(res => {
+          this.loading = false;
+          this.list = res.list;
+          this.total = res.total;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
+    },
+    goPay(orderNo) {
+      //三种路由传参方式
+      // this.$router.push('/order/pay')
+      /*this.$router.push({
+        name: 'order-pay',    //路由的name
+        query:{
+          orderNo
+        }
+      })*/
+      this.$router.push({
+        path: "/order/pay", //路径地址
+        query: {
+          orderNo
+        }
       });
+    },
+    //点击触发事件，会有一个回调参数，这个回调参数就是当前的页数
+    handelchange(pageNum) {
+      this.pageNum = pageNum;
+      this.getOrderList();
     }
   }
 };
@@ -104,7 +159,7 @@ export default {
       }
     }
     .order-content {
-        background-color: #ffffff;
+      background-color: #ffffff;
       padding: 0 43px;
       .good-box {
         width: 88%;
@@ -134,6 +189,14 @@ export default {
         }
       }
     }
+  }
+  .pagination {
+    text-align: right;
+    margin-top: 30px;
+  }
+  .el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: $colorA;
+    color: #fff;
   }
 }
 </style>
