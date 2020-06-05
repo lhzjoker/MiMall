@@ -180,12 +180,7 @@ export default {
     }
   },
   mounted() {
-    if(this.$cookie.get('userId')){
-      this.getCartList();
-    }else{
-      this.$router.push('/login')
-    }
-    
+    this.getCartList();
   }
 };
 </script>
