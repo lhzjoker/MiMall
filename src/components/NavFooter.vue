@@ -11,8 +11,8 @@
     </div>
     <div class="Copyright">
         Copyright ©2020 
-      <span>mi.lhzjoker.com</span>
-       All Rights Reserved
+      <span>叫我阿华就好了</span>
+       <a href="http://www.beian.miit.gov.cn/">湘ICP备20010729号</a>
     </div>
   </div>
 </template>
@@ -71,6 +71,11 @@ export default {
   .Copyright{
       span{
           color: $colorA;
+      }
+      a{
+        color: #b0b0b0;
+        font-size: 16px;
+        margin-left: 5px;
       }
   }
 }
