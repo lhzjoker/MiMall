@@ -6,7 +6,7 @@ Vue全家桶实战模仿小米商城 从零独立开发企业级电商系统（�
 ### 克隆代码
 
 
-            https://github.com/lhzjoker/MiMall.git
+            git clone https://github.com/lhzjoker/MiMall.git
 ### 下载包
 
 
