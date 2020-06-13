@@ -11,6 +11,7 @@
         <div class="top-user">
           <a href="javascript:;" v-if="username">{{username}}</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
+          <a href="javascript:;" @click="register">注册</a>
           <a href="javascript:;" v-if="username" @click="goOrderList">我的订单</a>
           <a href="javascript:;" v-if="username" @click="offlogin">退出</a>
           <a href="javascript:;" class="my-cart" @click="goToCart">
@@ -136,6 +137,9 @@
       },
       login() {
         this.$router.push("/login");
+      },
+      register(){
+        this.$router.push("/register");
       },
       getCartCount() {
         this.axios.get('/carts/products/sum').then((res = 0) => {

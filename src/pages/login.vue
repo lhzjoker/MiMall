@@ -81,14 +81,7 @@ export default {
         });
     },
     register() {
-      let { username, password, email } = this;
-      this.axios.post("/user/register", {
-        username,
-        password,
-        email
-      }).then(()=>{
-        this.$message.success('注册成功')
-      });
+      this.$router.push("/register")
     }
   }
 };
