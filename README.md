@@ -1,6 +1,21 @@
 # MiMall
 Vue全家桶实战模仿小米商城 从零独立开发企业级电商系统（前端）
 
+## 使用方法
+
+### 克隆代码
+
+
+            git clone https://github.com/lhzjoker/MiMall.git
+### 下载包
+
+
+      npm install
+### 运行
+
+      
+      npm run serve
+
 ## 项目准备工作
 
 ### 开发工具
